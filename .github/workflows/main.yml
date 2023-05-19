@@ -1,0 +1,24 @@
+name: main workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: 'ogham/exa'
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --target x86_64-pc-windows-msvc
+      - uses: actions/upload-artifact@v3
+        with:
+          name: "exa-x86_64-pc-windows-msvc"
+          path: "target/x86_64-pc-windows-msvc/release/exa.exe"
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "target/x86_64-pc-windows-msvc/release/exa.exe"
+          body: "exa windows x64 binary built"
