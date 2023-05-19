@@ -1,10 +1,6 @@
 name: main workflow
 
-on:
-  workflow_dispatch:
-  push:
-    tags:
-      - "*"
+on: [push, workflow_dispatch]
 
 jobs:
   build-windows:
@@ -21,7 +17,7 @@ jobs:
         with:
           name: "exa-x86_64-pc-windows-msvc"
           path: "target/x86_64-pc-windows-msvc/release/exa.exe"
-      - uses: ncipollo/release-action@v1
+      - uses: softprops/action-gh-release@v1
         with:
-          artifacts: "target/x86_64-pc-windows-msvc/release/exa.exe"
+          files: "target/x86_64-pc-windows-msvc/release/exa.exe"
           body: "exa windows x64 binary built"
