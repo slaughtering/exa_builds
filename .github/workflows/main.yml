@@ -2,6 +2,9 @@ name: main workflow
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - "*"
 
 jobs:
   build-windows:
@@ -9,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'ogham/exa'
+          repository: "ogham/exa"
       - uses: actions-rs/cargo@v1
         with:
           command: build
