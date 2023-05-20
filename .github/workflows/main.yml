@@ -22,3 +22,4 @@ jobs:
           files: "target/x86_64-pc-windows-msvc/release/exa.exe"
           body: "exa windows x64 binary built"
           tag_name: "v1.1.1-test"
+          if: startsWith(github.ref, 'refs/tags/')
